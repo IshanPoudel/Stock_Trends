@@ -38,7 +38,7 @@ public class StockService
 
     {
 
-       //
+       //Need to add a async function , because the whole section is skipped because it is running in the background.
 
 
         String url = V_2_AGGS_TICKER +stockTicker+ HA_QGJ;
