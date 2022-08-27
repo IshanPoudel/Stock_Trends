@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,13 +52,46 @@ public class MainActivity extends AppCompatActivity {
 //                After the button is clicked make the API request to get the value.
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                String url = "https://api.polygon.io/v2/aggs/ticker/AAPL/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
+
+                //Get opening , close for one stock.
+                String url = "https://api.polygon.io/v2/aggs/ticker/AMZN/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
+                //Get previous day for every stock
+//                String url = "https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2020-10-14?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
 
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         System.out.println("I got a response back");
+
+                        //parse the JSON OBJECT
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+
+                            System.out.println(results.toString());
+                            //results is a array consistong of one json objecct
+                            JSONObject actual_results = results.getJSONObject(0);
+                            System.out.println(actual_results.toString());
+                            String ticker = actual_results.getString("T");
+                            Double opening_price = actual_results.getDouble("o");
+                            Double closing_price = actual_results.getDouble("c");
+                            Double highest_price = actual_results.getDouble("h");
+                            Double lowest_price = actual_results.getDouble("l");
+                            int total_volume_traded = actual_results.getInt("v");
+
+                            System.out.println(ticker);
+                            System.out.println(opening_price);
+                            System.out.println(closing_price);
+                            System.out.println(highest_price);
+                            System.out.println(lowest_price);
+                            System.out.println(total_volume_traded);
+
+
+                            System.out.println("Get value from ");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                         Toast.makeText(MainActivity.this , response.toString() , Toast.LENGTH_SHORT ).show();
                         System.out.println(response.toString());
