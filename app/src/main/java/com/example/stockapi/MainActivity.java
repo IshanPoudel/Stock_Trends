@@ -13,12 +13,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
-//    Set class member variables
+    //    Set class member variables
     Button btn_getStockPrice , btn_getStockNews , btn_getCryptoNews;
     EditText et_dataInput;
     ListView lv_stockPrice;
@@ -48,27 +53,30 @@ public class MainActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 String url = "https://api.polygon.io/v2/aggs/ticker/AAPL/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
 
-// Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                Toast.makeText(MainActivity.this   , response , Toast.LENGTH_SHORT).show();
-                            }
-                        }, new Response.ErrorListener() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        System.out.println("I got a response back");
+
+                        Toast.makeText(MainActivity.this , response.toString() , Toast.LENGTH_SHORT ).show();
+                        System.out.println(response.toString());
+
+                    }
+
+                    }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this   , error.toString() , Toast.LENGTH_SHORT).show();
                         System.out.println(error.toString());
+
                     }
                 });
 
-// Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                queue.add(request);
 
 
-//                Toast.makeText(MainActivity.this , "You typed " + et_dataInput.getText().toString()  , Toast.LENGTH_SHORT ).show();
+
+//
 
 
             }
