@@ -49,70 +49,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                After the button is clicked make the API request to get the value.
-                // Instantiate the RequestQueue.
+                StockService stockService = new StockService(MainActivity.this);
 
+                Double stockTicker = stockService.getStockPrice(et_dataInput.getText().toString());
 
-                //Get opening , close for one stock.
-                String url = "https://api.polygon.io/v2/aggs/ticker/AMZN/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
-                //Get previous day for every stock
-//                String url = "https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2020-10-14?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
+                Toast.makeText(MainActivity.this , "It worked?" , Toast.LENGTH_SHORT ).show();
 
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        System.out.println("I got a response back");
-
-                        //parse the JSON OBJECT
-                        try {
-                            JSONArray results = response.getJSONArray("results");
-
-                            System.out.println(results.toString());
-                            //results is a array consistong of one json objecct
-                            JSONObject actual_results = results.getJSONObject(0);
-                            System.out.println(actual_results.toString());
-                            String ticker = actual_results.getString("T");
-                            Double opening_price = actual_results.getDouble("o");
-                            Double closing_price = actual_results.getDouble("c");
-                            Double highest_price = actual_results.getDouble("h");
-                            Double lowest_price = actual_results.getDouble("l");
-                            int total_volume_traded = actual_results.getInt("v");
-
-                            System.out.println(ticker);
-                            System.out.println(opening_price);
-                            System.out.println(closing_price);
-                            System.out.println(highest_price);
-                            System.out.println(lowest_price);
-                            System.out.println(total_volume_traded);
-
-
-                            System.out.println("Get value from ");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        Toast.makeText(MainActivity.this , response.toString() , Toast.LENGTH_SHORT ).show();
-                        System.out.println(response.toString());
-
-                    }
-
-                    }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.toString());
-
-                    }
-                });
-
-//                after creating a JSON OBject request , we give this request to the DataService class which is a singleton class.
-
-                DataService.getInstance(MainActivity.this).addToRequestQueue(request);
-
-
-
-//
 
 
             }
