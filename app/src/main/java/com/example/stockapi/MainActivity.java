@@ -51,7 +51,20 @@ public class MainActivity extends AppCompatActivity {
 
                 StockService stockService = new StockService(MainActivity.this);
 
-                Double stockTicker = stockService.getStockPrice(et_dataInput.getText().toString());
+                //VolletResonselistener will listen to the response and give us either the actual value or the error.
+                stockService.getStockPrice(et_dataInput.getText().toString(), new StockService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this , "Something Wrong" , Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onResponse(Double openingPrice) {
+                        Toast.makeText(MainActivity.this , "It worked. The stock price is " + openingPrice.toString() , Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
                 Toast.makeText(MainActivity.this , "It worked?" , Toast.LENGTH_SHORT ).show();
 

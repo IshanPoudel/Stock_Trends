@@ -32,9 +32,18 @@ public class StockService
     }
 
 
+    //Add a volley listener interface for using async callbacks.
+    public  interface VolleyResponseListener{
+        void onError(String message);
+
+        void onResponse(Double openingPrice);
+    }
 
 
-    public Double getStockPrice(String stockTicker)
+
+
+
+    public void getStockPrice(String stockTicker , VolleyResponseListener volleyResponseListener)
 
     {
 
@@ -81,7 +90,8 @@ public class StockService
 
 
                 Toast.makeText(context , response.toString() , Toast.LENGTH_SHORT ).show();
-                System.out.println(response.toString());
+                //have the opening price sent to the volley listener.
+                volleyResponseListener.onResponse(opening_price.doubleValue());
 
             }
 
@@ -89,6 +99,8 @@ public class StockService
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error.toString());
+                //have the error sent to the volley listener.
+                volleyResponseListener.onError("Something error");
 
             }
         });
@@ -99,7 +111,7 @@ public class StockService
 
        // RETURNED A NULL VALUE.
 
-        return opening_price;
+
     }
 
 //    public List<StockServiceModel> getStockbyTicker(String ticker)
