@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                After the button is clicked make the API request to get the value.
                 // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
 
                 //Get opening , close for one stock.
                 String url = "https://api.polygon.io/v2/aggs/ticker/AMZN/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
@@ -106,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                queue.add(request);
+//                after creating a JSON OBject request , we give this request to the DataService class which is a singleton class.
+
+                DataService.getInstance(MainActivity.this).addToRequestQueue(request);
 
 
 
