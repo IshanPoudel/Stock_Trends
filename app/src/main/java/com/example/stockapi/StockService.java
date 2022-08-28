@@ -13,6 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StockService
 
@@ -114,10 +116,53 @@ public class StockService
 
     }
 
-//    public List<StockServiceModel> getStockbyTicker(String ticker)
-//    {
-//
-//    }
+    public void getTradesOverTime(String ticker )
+    {
+        //from a ticker , instantiate a StockModel , get previous days forecast , but also get more.
+
+
+        String url = "https://api.polygon.io/v1/open-close/"+ticker+"/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
+//        String url ="https://api.polygon.io/v1/open-close/AAPL/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
+        System.out.println("I am inside getTradesOverTime");
+
+        List<StockModel> report = new ArrayList<>();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Parse the JSON Object
+
+                try {
+                    System.out.println("I got a response back");
+                    Double opening_price = response.getDouble("open");
+                    Double closing_price = response.getDouble("close");
+                    Toast.makeText(context , "Opening price yesterday" + opening_price.toString() , Toast.LENGTH_SHORT).show();
+                    System.out.println(opening_price.toString());
+                    System.out.println(closing_price.toString());
+
+                }catch (Exception e)
+                {
+                    System.out.println("Could not parse it");
+                    e.printStackTrace();
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                System.out.println(error.toString());
+
+            }
+        });
+
+        DataService.getInstance(context).addToRequestQueue(request);
+
+
+
+
+    }
 
 
 

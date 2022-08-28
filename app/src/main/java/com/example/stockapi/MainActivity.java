@@ -76,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
         btn_getStockNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this , "You clicked on StockNews"  , Toast.LENGTH_SHORT ).show();
+
+                System.out.println("I am inside stocknews");
+
+                StockService stockService = new StockService(MainActivity.this );
+                stockService.getTradesOverTime(et_dataInput.getText().toString());
             }
         });
 
