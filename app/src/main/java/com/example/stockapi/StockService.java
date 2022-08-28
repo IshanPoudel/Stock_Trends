@@ -164,6 +164,12 @@ public class StockService
 
     }
 
+    public void getNews(String ticker)
+    {
+        String url = "";
+
+    }
+
 
 
 }

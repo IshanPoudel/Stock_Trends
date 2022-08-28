@@ -77,18 +77,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println("I am inside stocknews");
 
-                StockService stockService = new StockService(MainActivity.this );
-                stockService.getTradesOverTime(et_dataInput.getText().toString());
             }
         });
 
         btn_getCryptoNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                et_dataInput.getText().toString() gets the text typed in the text field with id et_datainput
-                Toast.makeText(MainActivity.this , "You typed " + et_dataInput.getText().toString()  , Toast.LENGTH_SHORT ).show();
+                System.out.println("I am inside stocknews");
+
+                StockService stockService = new StockService(MainActivity.this );
+                stockService.getTradesOverTime(et_dataInput.getText().toString());
             }
         });
 
