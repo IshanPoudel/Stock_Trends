@@ -20,6 +20,7 @@ public class StockService
 
 {
 
+
     public static final String V_2_AGGS_TICKER = "https://api.polygon.io/v2/aggs/ticker/";
     public static final String HA_QGJ = "/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
     Context context;

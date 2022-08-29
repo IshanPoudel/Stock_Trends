@@ -1,0 +1,8 @@
+In stockservice.java
+getNews function calls from a local flask api , so needed to allow http clear text to get the json file. The flask server uses a http request.
+To get a https request going on  , we need to either have certificates or disable certificates for the future. To dsiable certificates , a  static function
+handleSSLHandshake is created in the MianActivity.java and is called. Still need further calrification.
+
+
+In stockservice,.java , getStockPrice function has a volleylistener which listens for the output of the API call and get it started.
+In stockservice.java , getNews anf getTradesOvertime have not added the volleyListener yet.
