@@ -1,0 +1,13 @@
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <base-config cleartextTrafficPermitted="true"></base-config>
+
+    <domain-config>
+    <domain includeSubdomains="true">191.1.1.0</domain>
+    <domain includeSubdomains="true">10.219.165.150</domain>
+    <trust-anchors>
+        <certificates src="system" />
+        <certificates src="user" />
+    </trust-anchors>
+</domain-config>
+    </network-security-config>

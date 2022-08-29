@@ -166,7 +166,48 @@ public class StockService
 
     public void getNews(String ticker)
     {
-        String url = "";
+//        String url = "http://127.0.0.1:5000/get_specific_news";
+        String url = "http://10.219.165.150:5000/get_specific_news";
+        System.out.println("I am inside getNews");
+        JsonObjectRequest newsRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                String [] news_array = new String[5000];
+
+                // try to parse the response.
+                try {
+                    System.out.println("i got a response back");
+                    JSONArray news = response.getJSONArray("goog");
+                    for (int i=0; i<news.length();i++)
+                    {
+                        news_array[i] = news.getString(i);
+                        System.out.println(news_array[i]);
+
+                    }
+
+                    System.out.println("I succesfully got the value from the API. ");
+
+
+
+                }catch (Exception e)
+                {
+                    System.out.println("Could not parse it");
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error.toString());
+
+            }
+        });
+
+        DataService.getInstance(context).addToRequestQueue(newsRequest);
+
 
     }
 
