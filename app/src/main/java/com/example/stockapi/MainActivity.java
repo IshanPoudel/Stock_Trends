@@ -75,7 +75,22 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(StockModel model) {
-                        Toast.makeText(MainActivity.this , "It worked. The stock price is " + model.getOpening_price().toString() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this , "The opening price for the previous day was " + model.getOpening_price().toString() , Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                CurrentPriceService currentPriceService = new CurrentPriceService(MainActivity.this);
+                currentPriceService.getCurrentRealTimePrice(et_dataInput.getText().toString(), new CurrentPriceService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this , "An error occured." , Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(Double current_price, Double percent_change) {
+
+                        Toast.makeText(MainActivity.this , "Current Price is " + current_price.toString()+" Percentage change:" + percent_change.toString() , Toast.LENGTH_SHORT).show();
 
                     }
                 });
