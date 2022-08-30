@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -91,8 +92,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 System.out.println(" I clicked the getStockNews Button");
-                StockService stockService =new StockService(MainActivity.this);
-                stockService.getNews("goog");
+                NewsService newsService = new NewsService(MainActivity.this);
+                newsService.getNews("AMZN", new NewsService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        System.out.println("There was some error");
+                    }
+
+                    @Override
+                    public void onResponse(ArrayList<NewsModel> newsArray) {
+                        System.out.println("I got a response back from the volleyListener for my NewsModel class");
+                        NewsModel first = newsArray.get(0);
+                        Toast.makeText(MainActivity.this , first.toString() , Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
 
 
             }
@@ -101,10 +116,24 @@ public class MainActivity extends AppCompatActivity {
         btn_getCryptoNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("I am inside stocknews");
 
-                StockService stockService = new StockService(MainActivity.this );
-                stockService.getTradesOverTime(et_dataInput.getText().toString());
+
+                RandomNewsService randomNewsService = new RandomNewsService(MainActivity.this);
+                randomNewsService.getShuffledNews(new RandomNewsService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this , "Error Retrieving Data try agsin" , Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(ArrayList<NewsModel> randomNews) {
+                        System.out.println("I got a response back from the volleyListener for my NewsModel class");
+                        NewsModel first = randomNews.get(0);
+                        NewsModel second = randomNews.get(0);
+                        Toast.makeText(MainActivity.this , first.toString() , Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 

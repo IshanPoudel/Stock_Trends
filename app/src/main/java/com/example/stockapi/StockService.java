@@ -191,8 +191,12 @@ public class StockService
                     {
 
                         JSONArray individual_news = news.getJSONArray(i);
+                        System.out.println(individual_news.getString(0));
                         System.out.println(individual_news.getString(1));
                         System.out.println(individual_news.getString(2));
+                        System.out.println(individual_news.getString(3));
+                        System.out.println(individual_news.getString(4));
+                        System.out.println(individual_news.getString(5));
                     }
 
 
