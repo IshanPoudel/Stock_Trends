@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
 //        handleSSLHandshake();
         setContentView(R.layout.activity_main);
 
+        long unixTime = System.currentTimeMillis() / 1000L;
+        System.out.println(unixTime);
+        System.out.println(unixTime-31556926);
+
 
         //Creating values to each control in the layout
 
@@ -91,6 +95,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Double current_price, Double percent_change) {
 
                         Toast.makeText(MainActivity.this , "Current Price is " + current_price.toString()+" Percentage change:" + percent_change.toString() , Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                CandleService candleService = new CandleService(MainActivity.this);
+                candleService.getCandlePrice( et_dataInput.getText().toString(), new CandleService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this , "Error getting CandleService" , Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(ArrayList<Double> Closing_Prices) {
+
+
+                        System.out.println("Succesfully got the closingPrices. Good job." + Closing_Prices.toString());
 
                     }
                 });

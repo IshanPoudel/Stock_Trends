@@ -123,103 +123,54 @@ public class StockService
 
     }
 
-    public void getTradesOverTime(String ticker )
-    {
-        //from a ticker , instantiate a StockModel , get previous days forecast , but also get more.
+//    public void getTradesOverTime(String ticker )
+//    {
+//        //from a ticker , instantiate a StockModel , get previous days forecast , but also get more.
+//
+//
+//        String url = "https://api.polygon.io/v1/open-close/"+ticker+"/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
+////        String url ="https://api.polygon.io/v1/open-close/AAPL/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
+//        System.out.println("I am inside getTradesOverTime");
+//
+//        List<StockModel> report = new ArrayList<>();
+//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                //Parse the JSON Object
+//
+//                try {
+//                    System.out.println("I got a response back");
+//                    Double opening_price = response.getDouble("open");
+//                    Double closing_price = response.getDouble("close");
+//                    Toast.makeText(context , "Opening price yesterday" + opening_price.toString() , Toast.LENGTH_SHORT).show();
+//                    System.out.println(opening_price.toString());
+//                    System.out.println(closing_price.toString());
+//
+//                }catch (Exception e)
+//                {
+//                    System.out.println("Could not parse it");
+//                    e.printStackTrace();
+//
+//                }
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                System.out.println(error.toString());
+//
+//            }
+//        });
+//
+//        DataService.getInstance(context).addToRequestQueue(request);
+//
+//
+//
+//
+//    }
 
-
-        String url = "https://api.polygon.io/v1/open-close/"+ticker+"/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
-//        String url ="https://api.polygon.io/v1/open-close/AAPL/2022-07-26?adjusted=true&apiKey=M4RAN2Cb94slFxJODjdBj96kp4KqMIE_";
-        System.out.println("I am inside getTradesOverTime");
-
-        List<StockModel> report = new ArrayList<>();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                //Parse the JSON Object
-
-                try {
-                    System.out.println("I got a response back");
-                    Double opening_price = response.getDouble("open");
-                    Double closing_price = response.getDouble("close");
-                    Toast.makeText(context , "Opening price yesterday" + opening_price.toString() , Toast.LENGTH_SHORT).show();
-                    System.out.println(opening_price.toString());
-                    System.out.println(closing_price.toString());
-
-                }catch (Exception e)
-                {
-                    System.out.println("Could not parse it");
-                    e.printStackTrace();
-
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                System.out.println(error.toString());
-
-            }
-        });
-
-        DataService.getInstance(context).addToRequestQueue(request);
-
-
-
-
-    }
-
-    public void getNews(String ticker)
-    {
-//        String url = "http://127.0.0.1:5000/get_specific_news";
-        String url = "http://10.219.165.150:5000/get_specific_news/amzn";
-        System.out.println("I am inside getNews");
-        JsonObjectRequest newsRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                String [] news_array = new String[5000];
-
-                // try to parse the response.
-                try {
-                    System.out.println("i got a response back");
-                    JSONArray news = response.getJSONArray("data");
-
-                    for (int i=0 ; i<news.length();i++)
-                    {
-
-                        JSONArray individual_news = news.getJSONArray(i);
-                        System.out.println(individual_news.getString(0));
-                        System.out.println(individual_news.getString(1));
-                        System.out.println(individual_news.getString(2));
-                        System.out.println(individual_news.getString(3));
-                        System.out.println(individual_news.getString(4));
-                        System.out.println(individual_news.getString(5));
-                    }
-
-
-                }catch (Exception e)
-                {
-                    System.out.println("Could not parse it");
-                    e.printStackTrace();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error.toString());
-
-            }
-        });
-
-        DataService.getInstance(context).addToRequestQueue(newsRequest);
-
-
-    }
 
 
 
