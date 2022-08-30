@@ -174,7 +174,7 @@ public class StockService
     public void getNews(String ticker)
     {
 //        String url = "http://127.0.0.1:5000/get_specific_news";
-        String url = "http://10.219.165.150:5000/get_specific_news";
+        String url = "http://10.219.165.150:5000/get_specific_news/amzn";
         System.out.println("I am inside getNews");
         JsonObjectRequest newsRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -185,16 +185,15 @@ public class StockService
                 // try to parse the response.
                 try {
                     System.out.println("i got a response back");
-                    JSONArray news = response.getJSONArray("goog");
-                    for (int i=0; i<news.length();i++)
+                    JSONArray news = response.getJSONArray("data");
+
+                    for (int i=0 ; i<news.length();i++)
                     {
-                        news_array[i] = news.getString(i);
-                        System.out.println(news_array[i]);
 
+                        JSONArray individual_news = news.getJSONArray(i);
+                        System.out.println(individual_news.getString(1));
+                        System.out.println(individual_news.getString(2));
                     }
-
-                    System.out.println("I succesfully got the value from the API. ");
-
 
 
                 }catch (Exception e)
