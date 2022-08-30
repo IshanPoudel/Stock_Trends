@@ -25,6 +25,8 @@ public class StockService
     public static final String HA_QGJ = "/prev?adjusted=true&apiKey=jidNJUJtGY93nOyy97fLwCwlhP_HaQGJ";
     Context context;
     Double opening_price;
+    StockModel model = new StockModel();
+
 
 
     // to get the context , so we can have the stock make changes to the mainactivity.context
@@ -37,9 +39,9 @@ public class StockService
 
     //Add a volley listener interface for using async callbacks.
     public  interface VolleyResponseListener{
-        void onError(String message);
 
-        void onResponse(Double openingPrice);
+        void onError(String message);
+        void onResponse(StockModel model);
     }
 
 
@@ -72,7 +74,7 @@ public class StockService
                     JSONObject actual_results = results.getJSONObject(0);
                     System.out.println(actual_results.toString());
                     String ticker = actual_results.getString("T");
-                    opening_price = actual_results.getDouble("o");
+                    Double opening_price = actual_results.getDouble("o");
                     Double closing_price = actual_results.getDouble("c");
                     Double highest_price = actual_results.getDouble("h");
                     Double lowest_price = actual_results.getDouble("l");
@@ -85,8 +87,12 @@ public class StockService
                     System.out.println(lowest_price);
                     System.out.println(total_volume_traded);
 
+                    model.initialize(ticker , opening_price , closing_price , highest_price , lowest_price , total_volume_traded);
+
+
 
                     System.out.println("Get value from ");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -94,7 +100,7 @@ public class StockService
 
                 Toast.makeText(context , response.toString() , Toast.LENGTH_SHORT ).show();
                 //have the opening price sent to the volley listener.
-                volleyResponseListener.onResponse(opening_price.doubleValue());
+                volleyResponseListener.onResponse(model);
 
             }
 

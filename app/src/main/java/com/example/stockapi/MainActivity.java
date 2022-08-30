@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onResponse(Double openingPrice) {
-                        Toast.makeText(MainActivity.this , "It worked. The stock price is " + openingPrice.toString() , Toast.LENGTH_SHORT).show();
+                    public void onResponse(StockModel model) {
+                        Toast.makeText(MainActivity.this , "It worked. The stock price is " + model.getOpening_price().toString() , Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                Toast.makeText(MainActivity.this , "It worked?" , Toast.LENGTH_SHORT ).show();
+
 
 
 
