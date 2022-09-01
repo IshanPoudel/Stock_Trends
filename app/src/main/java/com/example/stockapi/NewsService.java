@@ -58,13 +58,13 @@ public class NewsService {
                         NewsModel newsModel = new NewsModel();
 
                         JSONArray individual_news = news.getJSONArray(i);
-                        //Have it saved to the  model .
-//                        System.out.println(individual_news.getString(0));
-//                        System.out.println(individual_news.getString(1));
-//                        System.out.println(individual_news.getString(2));
-//                        System.out.println(individual_news.getString(3));
-//                        System.out.println(individual_news.getString(4));
-//                        System.out.println(individual_news.getString(5));
+//                        Have it saved to the  model .
+                        System.out.println(individual_news.getString(0));
+                        System.out.println(individual_news.getString(1));
+                        System.out.println(individual_news.getString(2));
+                        System.out.println(individual_news.getString(3));
+                        System.out.println(individual_news.getString(4));
+                        System.out.println(individual_news.getString(5));
                         newsModel.initialize(ticker , individual_news.getString(0) , individual_news.getString(1) , individual_news.getString(2) , individual_news.getString(3) , individual_news.getString(4) , individual_news.getString(5) );
                         newsArray.add(newsModel);
                         System.out.println("Added" + newsModel.toString());

@@ -130,7 +130,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-           sendNews(view);
+                System.out.println(" I clicked the getStockNews Button");
+                NewsService newsService = new NewsService(MainActivity.this);
+                newsService.getNews("AMZN", new NewsService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        System.out.println("There was some error");
+                    }
+
+                    @Override
+                    public void onResponse(ArrayList<NewsModel> newsArray) {
+                        System.out.println("I got a response back from the volleyListener for my NewsModel class");
+                        NewsModel first = newsArray.get(0);
+                        Toast.makeText(MainActivity.this , first.toString() , Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+
+
 
 
             }
