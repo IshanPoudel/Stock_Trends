@@ -1,41 +1,14 @@
-In stockservice.java
-getNews function calls from a local flask api , so needed to allow http clear text to get the json file. The flask server uses a http request.
-To get a https request going on  , we need to either have certificates or disable certificates for the future. To dsiable certificates , a  static function
-handleSSLHandshake is created in the MianActivity.java and is called. Still need further calrification.
-
-
-In stockservice,.java , getStockPrice function has a volleylistener which listens for the output of the API call and get it started.
-In stockservice.java , getNews anf getTradesOvertime have not added the volleyListener yet.
-
-ToDo:
-
-HAVE GET METHOD IN THE FLASK SERVER
-HAVE THE SENTIMENT ANALYSIS TOOL DEPLOYED ON THE FLASK SERVER.
-
-Work on having a better working news sentiment tool.
-Get data for the last 5 days for a stock.
-Have it all shown in the screen.
-Update Buttons.
-Have multiple swipes.
-Set stocks to track.
-UI Design.
-Deploy.
-After , have a sign in capabilities.
-Set
-
-Websocket realtime update.
-
-
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroActivity"
+    tools:context=".Splash"
     android:background="#90ee90">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="538dp"
         android:layout_height="474dp"
         android:layout_marginStart="8dp"
@@ -51,20 +24,29 @@ Websocket realtime update.
         android:layout_width="373dp"
         android:layout_height="170dp"
         android:fontFamily="@font/bangers"
-        android:text="Stock Analytics"
+        android:text="    Stock Analytics"
         android:textColor="#B36148"
         android:textSize="48sp"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="466dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="78dp"
+        android:layout_marginBottom="70dp"
         android:text="Real Time Stock Analysis"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="548dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

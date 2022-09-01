@@ -3,11 +3,13 @@ package com.example.stockapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_getStockPrice , btn_getStockNews , btn_getCryptoNews;
     EditText et_dataInput;
     ListView lv_stockPrice;
+    ScrollView data_output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         long unixTime = System.currentTimeMillis() / 1000L;
-        System.out.println(unixTime);
-        System.out.println(unixTime-31556926);
+
 
 
         //Creating values to each control in the layout
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         btn_getCryptoNews=findViewById(R.id.get_cryptoNews);
 
         et_dataInput = findViewById(R.id.et_dataInput);
-        lv_stockPrice = findViewById(R.id.lv_stockPrice);
+//        lv_stockPrice = findViewById(R.id.lv_stockPrice);
+        data_output = findViewById(R.id.data_output);
 
 //        Create listeners for each function
         btn_getStockPrice.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(StockModel model) {
                         Toast.makeText(MainActivity.this , "The opening price for the previous day was " + model.getOpening_price().toString() , Toast.LENGTH_SHORT).show();
+
 
                     }
                 });
@@ -126,23 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(" I clicked the getStockNews Button");
-                NewsService newsService = new NewsService(MainActivity.this);
-                newsService.getNews("AMZN", new NewsService.VolleyResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        System.out.println("There was some error");
-                    }
-
-                    @Override
-                    public void onResponse(ArrayList<NewsModel> newsArray) {
-                        System.out.println("I got a response back from the volleyListener for my NewsModel class");
-                        NewsModel first = newsArray.get(0);
-                        Toast.makeText(MainActivity.this , first.toString() , Toast.LENGTH_SHORT).show();
-
-
-                    }
-                });
+           sendNews(view);
 
 
             }
@@ -184,8 +172,25 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
+
+    public void sendNews(View view )
+    {
+        Intent intent = new Intent(this , News_Activity.class);
+        //first get reference to the first one.
+       String msg = et_dataInput.getText().toString();
+
+       //Send this value to the next screen.
+        //Send next value to the dictionary.
+        intent.putExtra("StockTicker" , msg);
+
+        startActivity(intent);
+
+
+    }
     @SuppressLint("TrulyRandom")
     public static void handleSSLHandshake()
     {
