@@ -1,0 +1,34 @@
+In stockservice.java
+getNews function calls from a local flask api , so needed to allow http clear text to get the json file. The flask server uses a http request.
+To get a https request going on  , we need to either have certificates or disable certificates for the future. To dsiable certificates , a  static function
+handleSSLHandshake is created in the MianActivity.java and is called. Still need further calrification.
+
+
+In stockservice,.java , getStockPrice function has a volleylistener which listens for the output of the API call and get it started.
+In stockservice.java , getNews anf getTradesOvertime have not added the volleyListener yet.
+
+ToDo:
+
+HAVE GET METHOD IN THE FLASK SERVER
+HAVE THE SENTIMENT ANALYSIS TOOL DEPLOYED ON THE FLASK SERVER.
+
+Work on having a better working news sentiment tool.
+Get data for the last 5 days for a stock.
+Have it all shown in the screen.
+Update Buttons.
+Have multiple swipes.
+Set stocks to track.
+UI Design.
+Deploy.
+After , have a sign in capabilities.
+Set
+
+Websocket realtime update.
+
+
+
+//To do
+
+//Have a line chart.
+//Display the current price and percentage change.
+// Fix the issue of image not loading while using a data uri.
