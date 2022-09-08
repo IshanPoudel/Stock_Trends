@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -58,12 +59,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         if(headlines.get(position).getImage_link()!=null)
         {
 
-            File file = new File(headlines.get(position).getImage_link());
 
 
 
 
-            Picasso.get().load(Uri.parse(headlines.get(position).getNews_link().toString())).into(holder.img_headline);
+
+//            Picasso.get().load(headlines.get(position).getImage_link()).fit().into(holder.img_headline);
+            Glide.with(context).load(headlines.get(position).getImage_link()).override(250 , 250).centerCrop().into(holder.img_headline);
+            //need to resize.
+
             System.out.println("I am supposed to be loading " + headlines.get(position).getImage_link());
 //            Picasso.get().load("https://s.yimg.com/ny/api/res/1.2/OvAPTlUKoCvXULMe9dh5ZA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTQ4MDtjZj13ZWJw/https://s.yimg.com/uu/api/res/1.2/qbg4FElLS8eIgn1Smy7VQg--~B/aD02NDA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/marketwatch.com/7f5817ee649c054f865c2cbb8b31dbd1").into(holder.img_headline);
 

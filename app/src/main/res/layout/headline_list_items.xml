@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="395dp"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="3dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -42,7 +42,7 @@
 
                 <TextView
                     android:id="@+id/text_stock_symbol"
-                    android:layout_width="111dp"
+                    android:layout_width="87dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:textColor="#0C0C0C"
@@ -75,8 +75,8 @@
 
         <ImageView
             android:id="@+id/img_healdine"
-            android:layout_width="13dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background">

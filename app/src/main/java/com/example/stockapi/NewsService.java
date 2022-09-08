@@ -59,6 +59,7 @@ public class NewsService {
 
                         JSONArray individual_news = news.getJSONArray(i);
 //                        Have it saved to the  model .
+                        System.out.println("Hey");
                         System.out.println(individual_news.getString(0));
                         System.out.println(individual_news.getString(1));
                         System.out.println(individual_news.getString(2));
