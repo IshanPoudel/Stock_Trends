@@ -7,10 +7,14 @@ Stock market analyzer using News headlines and sumary by utilizing Natural Langu
 <h1><b>About</b></h1> 
 
 Stock Trends is an android application . It is suppoted in the backend by a database. 
-The application communicates to the backend via microservices. 
+The application communicates to the backend via microservices.
 
 
-The backend for the application was developed using Python and Flask. 
+
+
+The backend for the application was developed using Python and Flask.  It can be found here : https://github.com/IshanPoudel/InvestmentResearch
+
+
 A crawler written using beautifulSoup and Selenium crawls through various financial websites to collect news from various websites. 
 The news headline and summary is stored in a MySQL database. 
 
